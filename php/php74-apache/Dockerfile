@@ -40,8 +40,8 @@ RUN apt-get update \
     && ln -sf /proc/1/fd/1 /var/log/apache2/access.log \
     && ln -sf /proc/1/fd/2 /var/log/apache2/error.log
 
-COPY ./deploy/docker/dev/docker-php-entrypoint /usr/local/bin/
-COPY ./deploy/docker/dev/apache2-foreground /usr/local/bin/
+COPY .docker-php-entrypoint /usr/local/bin/
+COPY apache2-foreground /usr/local/bin/
 
 EXPOSE 80
 
