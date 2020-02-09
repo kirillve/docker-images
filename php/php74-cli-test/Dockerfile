@@ -32,24 +32,20 @@ RUN set -x \
         make \
         autoconf \
         libz-dev \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man
-
-RUN pecl install xdebug
-RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" > /etc/php/7.4/cli/conf.d/90-xdebug.ini
+    && apt clean
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && sed -i 's/^display_errors = Off/display_errors = On/g' /etc/php/7.4/cli/php.ini \
     && sed -i 's/^display_startup_errors = Off/display_startup_errors = On/g' /etc/php/7.4/cli/php.ini \
     && sed -i 's/^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/g' /etc/php/7.4/cli/php.ini
 
-RUN apt-get update \
-     apt-get install -y \
-     apt-transport-https \
-     ca-certificates \
-     curl \
-     gnupg2 \
-     software-properties-common
+RUN apt update \
+    && apt install -y \
+         apt-transport-https \
+         ca-certificates \
+         curl \
+         gnupg2 \
+         software-properties-common
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
     && apt-key fingerprint 0EBFCD88 \
@@ -61,11 +57,11 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
 # Update and install system base packages
 # don't allow the package to install its sysctl file (causes the install to fail)
 # Failed to write '262144' to '/proc/sys/vm/max_map_count': Read-only file system
-RUN apt-get update -qq; \
-    apt-get install -y \
+RUN apt update -qq \
+    && apt install -y \
         docker-ce \
-    ; apt-get clean \
-    ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && apt clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man
 
 RUN curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; \
     chmod +x /usr/local/bin/docker-compose
