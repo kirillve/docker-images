@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 SHELL ["/bin/bash", "-c"]
 STOPSIGNAL SIGTERM
@@ -19,7 +19,7 @@ RUN echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.li
 
 RUN apt-get update \
     && apt-get install -y \
-        postgresql-client-11 \
+        postgresql-client-12 \
         php7.4-curl \
         php7.4-cli \
         php7.4-intl \
