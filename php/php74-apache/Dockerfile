@@ -1,21 +1,16 @@
-FROM debian:buster-slim
+FROM debian:stretch-slim
 
-SHELL ["/bin/bash", "-c"]
-STOPSIGNAL SIGTERM
-
-# System update
-RUN set -x && \
-    apt update -qq && \
-    apt -y dist-upgrade && \
-    apt install -y wget apt-transport-https apt-utils gnupg2
-
-RUN echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list && \
-    wget --quiet -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
-RUN apt-get update \
-    && apt-get install -y \
+ENV DEBIAN_FRONTEND noninteractive
+RUN set -x \
+    && apt update -qq \
+    && apt -y dist-upgrade \
+    && apt install -y wget apt-transport-https apt-utils gnupg2 \
+    && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
+    && wget --quiet -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
+    && echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
+    && apt update \
+    && apt install -y \
         postgresql-client-12 \
         php7.4-curl \
         php7.4-cli \
@@ -38,16 +33,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man \
     && a2enmod rewrite xsendfile php7.4 headers \
     && ln -sf /proc/1/fd/1 /var/log/apache2/access.log \
-    && ln -sf /proc/1/fd/2 /var/log/apache2/error.log
-
-COPY .docker-php-entrypoint /usr/local/bin/
-COPY apache2-foreground /usr/local/bin/
+    && ln -sf /proc/1/fd/2 /var/log/apache2/error.log \
+    && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 EXPOSE 80
-
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
+COPY docker-php-entrypoint /usr/local/bin/
+COPY apache2-foreground /usr/local/bin/
 ENTRYPOINT ["docker-php-entrypoint"]
 CMD ["apache2-foreground"]
 
