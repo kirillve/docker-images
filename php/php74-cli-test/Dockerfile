@@ -14,7 +14,6 @@ RUN set -x \
         postgresql-client-12 \
         php7.4-curl \
         php7.4-cli \
-        php7.4-gd \
         php7.4-intl \
         php7.4-json \
         php7.4-pgsql \
@@ -22,26 +21,26 @@ RUN set -x \
         php7.4-mbstring \
         php7.4-bcmath \
         php7.4-zip \
-        php-imagick \
+        php7.4-xdebug \
+        php7.4-dev \
         php-redis \
         php-pear \
+        libreadline-dev \
+        curl \
         unzip \
-        apache2 \
-        libapache2-mod-xsendfile \
-        libapache2-mod-php7.4 \
+        jq \
+        make \
+        autoconf \
+        libz-dev \
     && apt clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man \
-    && a2enmod rewrite xsendfile php7.4 headers \
-    && ln -sf /proc/1/fd/1 /var/log/apache2/access.log \
-    && ln -sf /proc/1/fd/2 /var/log/apache2/error.log \
-    && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man
 
-EXPOSE 80
-COPY docker-php-entrypoint /usr/local/bin/
-COPY apache2-foreground /usr/local/bin/
-ENTRYPOINT ["docker-php-entrypoint"]
-CMD ["apache2-foreground"]
+RUN pecl install xdebug
+RUN echo "zend_extension=/usr/lib/php/20190902/xdebug.so" > /etc/php/7.4/cli/conf.d/90-xdebug.ini
 
-ENV APACHE_DOCUMENT_ROOT /app/public
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && sed -i 's/^display_errors = Off/display_errors = On/g' /etc/php/7.4/cli/php.ini \
+    && sed -i 's/^display_startup_errors = Off/display_startup_errors = On/g' /etc/php/7.4/cli/php.ini \
+    && sed -i 's/^error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT/error_reporting = E_ALL/g' /etc/php/7.4/cli/php.ini
+
 WORKDIR /app

@@ -1,13 +1,13 @@
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN set -x \
     && apt update -qq \
     && apt -y dist-upgrade \
     && apt install -y wget apt-transport-https apt-utils gnupg2 \
-    && echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list \
+    && echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list \
     && wget --quiet -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg \
-    && echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+    && echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
     && apt update \
     && apt install -y \
