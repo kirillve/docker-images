@@ -1,8 +1,12 @@
 #!/bin/sh
 set -e
 
-if [ ! -f /app/.env ]; then
-    printenv > /app/.env
+ENV_FILE=/app/.env
+ENVVARS_FILE=/app/.envvars
+if [ ! -f ${ENV_FILE} ]; then
+  if [ ! -f ${ENVVARS_FILE} ]; then
+     cat ${ENVVARS_FILE} | while read line; do echo $line=`printenv $line` >> ${ENV_FILE}; done
+  fi
 fi
 
 # first arg is `-f` or `--some-option`
