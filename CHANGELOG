@@ -3,3 +3,4 @@ v x.x
   - updated php74-apache entry point to dump env to /app/.env file upon container start (kv) 2020-02-12
   - chmod +x nginx/bin/entrypoint.sh (kv) 2020-02-08
   - added LICENSE file (kv) 2020-02-08
+  - added postgres folder, inspired by https://github.com/mrts/docker-postgresql-multiple-databases (kv) 2020-02-18
