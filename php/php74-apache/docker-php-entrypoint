@@ -4,7 +4,7 @@ set -e
 ENV_FILE=/app/.env
 ENVVARS_FILE=/app/.envvars
 if [ ! -f ${ENV_FILE} ]; then
-  if [ ! -f ${ENVVARS_FILE} ]; then
+  if [ -f ${ENVVARS_FILE} ]; then
      cat ${ENVVARS_FILE} | while read line; do echo $line=`printenv $line` >> ${ENV_FILE}; done
   fi
 fi
