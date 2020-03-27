@@ -5,3 +5,4 @@ v x.x
   - added LICENSE file (kv) 2020-02-08
   - added postgres folder, inspired by https://github.com/mrts/docker-postgresql-multiple-databases (kv) 2020-02-18
   - updated Apache config to AllowOverride (ak) 2020-03-20
+  - added nodejs Dockerfile (kv) 2020-03-26
