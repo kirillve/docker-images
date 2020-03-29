@@ -6,3 +6,4 @@ v x.x
   - added postgres folder, inspired by https://github.com/mrts/docker-postgresql-multiple-databases (kv) 2020-02-18
   - updated Apache config to AllowOverride (ak) 2020-03-20
   - added nodejs Dockerfile (kv) 2020-03-26
+  - added proto file generator Dockerfile (kv) 2020-03-28
