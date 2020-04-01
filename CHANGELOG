@@ -7,3 +7,4 @@ v x.x
   - updated Apache config to AllowOverride (ak) 2020-03-20
   - added nodejs Dockerfile (kv) 2020-03-26
   - added proto file generator Dockerfile (kv) 2020-03-28
+  - added php71- docker files (kv) 2020-03-31
