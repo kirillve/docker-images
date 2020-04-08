@@ -14,6 +14,7 @@ RUN set -x \
         postgresql-client-12 \
         php7.1-curl \
         php7.1-cli \
+        php7.1-gd \
         php7.1-intl \
         php7.1-json \
         php7.1-pgsql \
