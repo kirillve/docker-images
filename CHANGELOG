@@ -11,3 +11,4 @@ v x.x
   - added docker files source link (kv) 2020-03-31
   - added rm -f ${ENV_FILE} for apache2 (kv) 2020-04-06
   - added php7.x-libgd (kv) 2020-04-07
+  - updated php7.1 docker files (kv) 2020-04-13

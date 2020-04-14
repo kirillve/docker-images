@@ -23,7 +23,7 @@ RUN set -x \
         php7.1-mbstring \
         php7.1-bcmath \
         php7.1-zip \
-        php-redis \
+        php7.1-redis \
         php-pear \
         unzip \
     && apt clean \
