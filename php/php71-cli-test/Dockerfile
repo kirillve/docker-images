@@ -34,9 +34,6 @@ RUN set -x \
         make \
         autoconf \
         libz-dev \
-        php-dev \
-    && pecl install apcu_bc \
-    && echo "/usr/lib/php/20190902/apc.so" > /etc/php/7.1/cli/conf.d/apc.ini \
     && apt clean
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \

@@ -30,9 +30,6 @@ RUN set -x \
         apache2 \
         libapache2-mod-xsendfile \
         libapache2-mod-php7.1 \
-        php-dev \
-    && pecl install apcu_bc \
-    && echo "/usr/lib/php/20190902/apc.so" > /etc/php/7.1/apache2/conf.d/apc.ini \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man \
     && a2enmod rewrite xsendfile php7.1 headers \
