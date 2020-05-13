@@ -12,3 +12,4 @@ v x.x
   - added rm -f ${ENV_FILE} for apache2 (kv) 2020-04-06
   - added php7.x-libgd (kv) 2020-04-07
   - updated php7.1 docker files (kv) 2020-04-13
+  - added ability to overload timezone for PHP docker images (kv) 2020-05-13
