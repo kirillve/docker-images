@@ -22,6 +22,7 @@ RUN set -x \
         php7.4-mbstring \
         php7.4-bcmath \
         php7.4-zip \
+        php7.4-imap \
         php-redis \
         php-pear \
         unzip \

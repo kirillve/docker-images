@@ -26,6 +26,7 @@ RUN set -x \
         php7.1-xdebug \
         php7.1-dev \
         php7.1-redis \
+        php7.1-imap \
         php-pear \
         libreadline-dev \
         curl \

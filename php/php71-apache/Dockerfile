@@ -25,6 +25,7 @@ RUN set -x \
         php7.1-zip \
         php7.1-imagick \
         php7.1-redis \
+        php7.1-imap \
         php-pear \
         unzip \
         apache2 \
