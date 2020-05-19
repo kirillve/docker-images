@@ -14,3 +14,4 @@ v x.x
   - updated php7.1 docker files (kv) 2020-04-13
   - added ability to overload timezone for PHP docker images (kv) 2020-05-13
   - added php7.[1|4]-imap (kv) 2020-05-17
+  - increased memory limit for php7.1 apache2 (kv) 2020-05-19
