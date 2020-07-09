@@ -40,7 +40,10 @@ RUN set -x \
     && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
     && sed -i '/<Directory ${APACHE_DOCUMENT_ROOT}>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && sed -i 's/memory_limit = .*/memory_limit = 512M/' /etc/php/7.1/apache2/php.ini \
-    && sed -i 's/upload_max_filesize = .*/upload_max_filesize = 512M/' /etc/php/7.1/apache2/php.ini
+    && sed -i 's/upload_max_filesize = .*/upload_max_filesize = 512M/' /etc/php/7.1/apache2/php.ini \
+    && sed -i '/<IfModule mpm_prefork_module>/,/<\/IfModule>/{//!d}' /etc/apache2/mods-available/mpm_prefork.conf \
+    && sed -i '/<\/IfModule>/i\\tStartServers\t\t10\n\tMinSpareServers\t\t10\n\tMaxSpareServers\t\t100\n\tMaxRequestWorkers\t250\n\tMaxConnectionsPerChild\t16384' /etc/apache2/mods-available/mpm_prefork.conf
+
 
 EXPOSE 80
 COPY docker-php-entrypoint /usr/local/bin/

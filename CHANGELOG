@@ -16,3 +16,4 @@ v x.x
   - added php7.[1|4]-imap (kv) 2020-05-17
   - increased memory limit for php7.1 apache2 (kv) 2020-05-19
   - added buster with docker (kv) 2020-06-15
+  - updated number of apache workers (kv) 2020-07-08
