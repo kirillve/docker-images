@@ -23,6 +23,7 @@ RUN set -x \
         php7.4-bcmath \
         php7.4-zip \
         php7.4-imap \
+        php7.4-mysql \
         php-imagick \
         php-redis \
         php-pear \

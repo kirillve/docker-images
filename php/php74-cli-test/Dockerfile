@@ -25,6 +25,7 @@ RUN set -x \
         php7.4-xdebug \
         php7.4-dev \
         php7.4-imap \
+        php7.4-mysql \
         php-redis \
         php-pear \
         libreadline-dev \
