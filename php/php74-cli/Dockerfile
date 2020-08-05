@@ -30,4 +30,7 @@ RUN set -x \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man
 
+COPY docker-php-entrypoint /usr/local/bin/
+ENTRYPOINT ["docker-php-entrypoint"]
+
 WORKDIR /app
