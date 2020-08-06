@@ -69,7 +69,4 @@ RUN apt update -qq \
 RUN curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose; \
     chmod +x /usr/local/bin/docker-compose
 
-COPY docker-php-entrypoint /usr/local/bin/
-ENTRYPOINT ["docker-php-entrypoint"]
-
 WORKDIR /app
