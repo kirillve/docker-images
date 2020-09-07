@@ -35,6 +35,7 @@ RUN set -x \
         make \
         autoconf \
         libz-dev \
+    && apt -y dist-upgrade \
     && apt clean
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \

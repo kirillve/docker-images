@@ -27,6 +27,7 @@ RUN set -x \
         php-redis \
         php-pear \
         unzip \
+    && apt -y dist-upgrade \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man
 

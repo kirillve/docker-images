@@ -31,6 +31,7 @@ RUN set -x \
         apache2 \
         libapache2-mod-xsendfile \
         libapache2-mod-php7.1 \
+    && apt -y dist-upgrade \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc /usr/share/man \
     && a2enmod rewrite xsendfile php7.1 headers \
