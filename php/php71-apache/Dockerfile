@@ -43,7 +43,7 @@ RUN set -x \
     && sed -i 's/memory_limit = .*/memory_limit = 512M/' /etc/php/7.1/apache2/php.ini \
     && sed -i 's/upload_max_filesize = .*/upload_max_filesize = 512M/' /etc/php/7.1/apache2/php.ini \
     && sed -i '/<IfModule mpm_prefork_module>/,/<\/IfModule>/{//!d}' /etc/apache2/mods-available/mpm_prefork.conf \
-    && sed -i '/<\/IfModule>/i\\tStartServers\t\t10\n\tMinSpareServers\t\t10\n\tMaxSpareServers\t\t100\n\tMaxRequestWorkers\t250\n\tMaxConnectionsPerChild\t16384' /etc/apache2/mods-available/mpm_prefork.conf
+    && sed -i '/<\/IfModule>/i\\tStartServers\t\t10\n\tMinSpareServers\t\t10\n\tMaxSpareServers\t\t50\n\tMaxRequestWorkers\t50\n\tMaxConnectionsPerChild\t4096' /etc/apache2/mods-available/mpm_prefork.conf
 
 
 EXPOSE 80
