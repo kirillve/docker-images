@@ -27,6 +27,7 @@ RUN set -x \
         php7.4-imap \
         php7.4-mysql \
         php-redis \
+        php-mongodb \
         php-pear \
         libreadline-dev \
         curl \
