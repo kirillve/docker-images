@@ -18,3 +18,4 @@ v x.x
   - added buster with docker (kv) 2020-06-15
   - updated number of apache workers (kv) 2020-07-08
   - added mysql support for php74 images (kv) 2020-07-31
+  - added mongodb for php74 (anton) 2020-09-17

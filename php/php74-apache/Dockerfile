@@ -25,6 +25,7 @@ RUN set -x \
         php7.4-imap \
         php7.4-mysql \
         php-imagick \
+        php-mongodb \
         php-redis \
         php-pear \
         unzip \
@@ -44,10 +45,15 @@ RUN set -x \
     && sed -i '/<\/IfModule>/i\\tStartServers\t\t10\n\tMinSpareServers\t\t10\n\tMaxSpareServers\t\t50\n\tMaxRequestWorkers\t50\n\tMaxConnectionsPerChild\t4096' /etc/apache2/mods-available/mpm_prefork.conf
 
 EXPOSE 80
+
 COPY docker-php-entrypoint /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-php-entrypoint
+
 COPY apache2-foreground /usr/local/bin/
-ENTRYPOINT ["docker-php-entrypoint"]
-CMD ["apache2-foreground"]
+RUN chmod +x /usr/local/bin/apache2-foreground
+
+ENTRYPOINT ["/usr/local/bin/docker-php-entrypoint"]
+CMD ["/usr/local/bin/apache2-foreground"]
 
 ENV APACHE_DOCUMENT_ROOT /app/public
 WORKDIR /app
